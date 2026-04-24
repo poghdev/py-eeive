@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 setup(
     name="py-eeive",
-    version="0.0.2",
+    version="1.0.0",
     author="Poghoosyann",
     author_email="poghoosyann@gmail.com",
     description="Monitor your Python scripts with one decorator — retries, timing, and smart error explanations.",

@@ -252,6 +252,90 @@ ERRORS = {
             "fix":   "Обработай BrokenPipeError через try/except.",
         },
     },
+    "spanish": {
+        "ZeroDivisionError": {
+            "cause": "Estás dividiendo un número por cero.",
+            "fix":   "Verifica que el denominador no sea 0 antes de dividir.",
+        },
+        "FileNotFoundError": {
+            "cause": "No se encontró el archivo en la ruta especificada.",
+            "fix":   "Asegúrate de que el archivo exista y la ruta sea correcta.",
+        },
+        "KeyError": {
+            "cause": "La clave no existe en el diccionario.",
+            "fix":   "Usa .get('key') o verifica si la clave existe primero.",
+        },
+        "IndexError": {
+            "cause": "Acceso a un índice que no existe en la lista.",
+            "fix":   "Verifica la longitud de la lista antes de acceder.",
+        },
+        "TypeError": {
+            "cause": "Tipo de dato incorrecto.",
+            "fix":   "Revisa los tipos de tus variables (ej. str vs int).",
+        },
+        "ValueError": {
+            "cause": "Valor inesperado en una variable.",
+            "fix":   "Revisa el valor que pasas a la función.",
+        },
+        "AttributeError": {
+            "cause": "El objeto no tiene este atributo o método.",
+            "fix":   "Revisa errores tipográficos o el tipo de objeto.",
+        },
+        "NameError": {
+            "cause": "Variable no definida.",
+            "fix":   "Define la variable antes de usarla.",
+        },
+        "TimeoutError": {
+            "cause": "La operación tardó demasiado.",
+            "fix":   "Aumenta el tiempo de espera o revisa la red.",
+        },
+        "PermissionError": {
+            "cause": "Sin permisos para acceder al archivo o carpeta.",
+            "fix":   "Revisa permisos o ejecuta como administrador.",
+        },
+    },
+    "greek": {
+        "ZeroDivisionError": {
+            "cause": "Γίνεται διαίρεση με το μηδέν.",
+            "fix":   "Ελέγξτε αν ο παρονομαστής είναι 0 πριν τη διαίρεση.",
+        },
+        "FileNotFoundError": {
+            "cause": "Το αρχείο δεν βρέθηκε στην καθορισμένη διαδρομή.",
+            "fix":   "Βεβαιωθείτε ότι το αρχείο υπάρχει και η διαδρομή είναι σωστή.",
+        },
+        "KeyError": {
+            "cause": "Το κλειδί δεν υπάρχει στο λεξικό.",
+            "fix":   "Χρησιμοποιήστε .get('key') ή ελέγξτε αν το κλειδί υπάρχει.",
+        },
+        "IndexError": {
+            "cause": "Πρόσβαση σε δείκτη που δεν υπάρχει στη λίστα.",
+            "fix":   "Ελέγξτε το μήκος της λίστας πριν την πρόσβαση.",
+        },
+        "TypeError": {
+            "cause": "Λανθασμένος τύπος δεδομένων.",
+            "fix":   "Ελέγξτε τους τύπους των μεταβλητών σας (π.χ. str vs int).",
+        },
+        "ValueError": {
+            "cause": "Μη αναμενόμενη τιμή σε μια μεταβλητή.",
+            "fix":   "Ελέγξτε την τιμή που περνάτε στη συνάρτηση.",
+        },
+        "AttributeError": {
+            "cause": "Το αντικείμενο δεν έχει αυτό το χαρακτηριστικό.",
+            "fix":   "Ελέγξτε για τυπογραφικά λάθη ή τον τύπο του αντικειμένου.",
+        },
+        "NameError": {
+            "cause": "Η μεταβλητή δεν έχει οριστεί.",
+            "fix":   "Ορίστε τη μεταβλητή πριν τη χρησιμοποιήσετε.",
+        },
+        "TimeoutError": {
+            "cause": "Η λειτουργία άργησε πολύ.",
+            "fix":   "Αυξήστε το χρόνο αναμονής ή ελέγξτε το δίκτυο.",
+        },
+        "PermissionError": {
+            "cause": "Δεν έχετε δικαίωμα πρόσβασης στο αρχείο ή το φάκελο.",
+            "fix":   "Ελέγξτε τα δικαιώματα ή εκτελέστε ως διαχειριστής.",
+        },
+    },
 }
 
 TEXTS = {
@@ -284,6 +368,36 @@ TEXTS = {
         "log_saved":   "Лог сохранён",
         "unknown":     "Неизвестная ошибка — смотри traceback выше.",
         "in_file":     "в файле",
+    },
+    "spanish": {
+        "starting":    "Iniciando",
+        "success":     "Finalizado en",
+        "seconds":     "seg",
+        "attempt":     "Intento",
+        "retrying":    "Reintentando en",
+        "fatal":       "El script falló permanentemente",
+        "error_type":  "Error",
+        "error_line":  "Línea",
+        "cause":       "Causa",
+        "fix":         "Solución",
+        "log_saved":   "Log guardado",
+        "unknown":     "Error desconocido — revisa el traceback arriba.",
+        "in_file":     "en el archivo",
+    },
+    "greek": {
+        "starting":    "Εκκίνηση",
+        "success":     "Ολοκληρώθηκε σε",
+        "seconds":     "δευτ",
+        "attempt":     "Προσπάθεια",
+        "retrying":    "Επανάληψη σε",
+        "fatal":       "Η εκτέλεση απέτυχε οριστικά",
+        "error_type":  "Σφάλμα",
+        "error_line":  "Γραμμή",
+        "cause":       "Αιτία",
+        "fix":         "Διόρθωση",
+        "log_saved":   "Το αρχείο καταγραφής αποθηκεύτηκε",
+        "unknown":     "Άγνωστο σφάλμα — ελέγξτε το traceback παραπάνω.",
+        "in_file":     "στο αρχείο",
     },
 }
 
@@ -341,13 +455,36 @@ def monitor(retries=1, retry_delay=5, log=True, language="english", custom_error
     def decorator(func):
         is_async = inspect.iscoroutinefunction(func)
 
-        def handle_failure(attempt, exc, start_time):
+        def handle_failure(attempt, exc, start_time, attempts_data):
+            end_time = time.time()
+            elapsed = round(end_time - start_time, 2)
             error_name, line_no, filename, explanation = _get_error_info(exc, lang, custom_errors)
+            ram = _get_ram_usage()
+            
+            tb = exc.__traceback__
+            while tb.tb_next: tb = tb.tb_next
+            filtered_vars = _filter_locals(tb.tb_frame.f_locals)
+
+            attempts_data.append({
+                "attempt": attempt,
+                "elapsed": elapsed,
+                "error": error_name,
+                "variables": filtered_vars,
+                "ram_usage": ram
+            })
+
+            max_elapsed = max([a['elapsed'] for a in attempts_data]) if attempts_data else elapsed
+            bar = _get_timing_bar(elapsed, max_elapsed)
+
             print(
                 f"{RED}[py-eeive]{RESET} ❌ "
-                f"{t['attempt']} {BOLD}{attempt}/{retries}{RESET} — {t['error_line']} {line_no} — "
-                f"{RED}{error_name}{RESET}: {exc}"
+                f"{t['attempt']} {BOLD}{attempt}/{retries}{RESET} [{bar}] {elapsed}s — RAM: {ram} — "
+                f"{t['error_line']} {line_no} — {RED}{error_name}{RESET}"
             )
+            
+            if filtered_vars:
+                var_str = ", ".join([f"{k}={v}" for k, v in filtered_vars.items()])
+                print(f"    {DIM}Snapshot: {var_str}{RESET}")
             
             should_retry = attempt < retries and isinstance(exc, retry_on)
             current_delay = retry_delay * (2 ** (attempt - 1)) if exponential_backoff else retry_delay
@@ -357,7 +494,7 @@ def monitor(retries=1, retry_delay=5, log=True, language="english", custom_error
                 return True, current_delay
             return False, 0
 
-        def finalize_error(exc, start_time):
+        def finalize_error(exc, start_time, attempts_data):
             elapsed = round(time.time() - start_time, 2)
             error_name, line_no, filename, explanation = _get_error_info(exc, lang, custom_errors)
             tb_str = "".join(traceback.format_exception(type(exc), exc, exc.__traceback__))
@@ -380,7 +517,7 @@ def monitor(retries=1, retry_delay=5, log=True, language="english", custom_error
             print(f"  ⏱  {elapsed} {t['seconds']}")
 
             if log:
-                log_path = _save_log(func.__name__, error_name, tb_str, lang)
+                log_path = _save_log(func.__name__, error_name, tb_str, lang, attempts_data)
                 print(f"  📄 {t['log_saved']}: {DIM}{log_path}{RESET}")
 
             print(f"{RED}{BOLD}" + _line("━") + RESET + "\n")
@@ -392,8 +529,10 @@ def monitor(retries=1, retry_delay=5, log=True, language="english", custom_error
                 print(DIM + _line() + RESET)
                 start_time = time.time()
                 last_exc = None
+                attempts_data = []
 
                 for attempt in range(1, retries + 1):
+                    attempt_start = time.time()
                     try:
                         result = await func(*args, **kwargs)
                         elapsed = round(time.time() - start_time, 2)
@@ -401,13 +540,12 @@ def monitor(retries=1, retry_delay=5, log=True, language="english", custom_error
                         return result
                     except Exception as exc:
                         last_exc = exc
-                        can_retry, delay = handle_failure(attempt, exc, start_time)
+                        can_retry, delay = handle_failure(attempt, exc, attempt_start, attempts_data)
                         if can_retry:
                             await asyncio.sleep(delay)
                         else:
                             break
-                
-                finalize_error(last_exc, start_time)
+                finalize_error(last_exc, start_time, attempts_data)
                 raise last_exc
         else:
             @functools.wraps(func)
@@ -416,8 +554,10 @@ def monitor(retries=1, retry_delay=5, log=True, language="english", custom_error
                 print(DIM + _line() + RESET)
                 start_time = time.time()
                 last_exc = None
+                attempts_data = []
 
                 for attempt in range(1, retries + 1):
+                    attempt_start = time.time()
                     try:
                         result = func(*args, **kwargs)
                         elapsed = round(time.time() - start_time, 2)
@@ -425,13 +565,12 @@ def monitor(retries=1, retry_delay=5, log=True, language="english", custom_error
                         return result
                     except Exception as exc:
                         last_exc = exc
-                        can_retry, delay = handle_failure(attempt, exc, start_time)
+                        can_retry, delay = handle_failure(attempt, exc, attempt_start, attempts_data)
                         if can_retry:
                             time.sleep(delay)
                         else:
                             break
-                
-                finalize_error(last_exc, start_time)
+                finalize_error(last_exc, start_time, attempts_data)
                 raise last_exc
 
         return wrapper

@@ -30,7 +30,7 @@ main()
 | `retries` | `1` | How many times to retry on failure |
 | `retry_delay` | `5` | Seconds to wait between retries |
 | `log` | `True` | Save error log to `logs/` folder as JSON |
-| `language` | `"english"` | Output language: `"english"` or `"russian"` |
+| `language` | `"english"` | Output language: `"english"`, `"russian"`, `"spanish"`, `"greek"` |
 | `custom_errors` | `None` | Your own error explanations (dict) |
 | `exponential_backoff` | `False` | Double the delay on each retry |
 | `retry_on` | `(Exception,)` | Only retry on these specific exceptions |
