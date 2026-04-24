@@ -2,7 +2,7 @@
 
 Monitor your Python scripts with **one decorator** — automatic retries, timing, and smart error explanations.
 
-No external dependencies. Works with sync and async functions.
+Works with sync and async functions. Features RAM monitoring, variable snapshots, and webhooks.
 
 ## Install
 
@@ -34,6 +34,8 @@ main()
 | `custom_errors` | `None` | Your own error explanations (dict) |
 | `exponential_backoff` | `False` | Double the delay on each retry |
 | `retry_on` | `(Exception,)` | Only retry on these specific exceptions |
+| `webhook_url` | `None` | URL for Discord/Slack notifications on final failure |
+| `jitter` | `True` | Add random delay to prevent Thundering Herd problem |
 
 ## Example output — success
 
@@ -48,11 +50,13 @@ main()
 ```
 [py-eeive] Starting: main
 ──────────────────────────────────────────────────
-[py-eeive] ❌ Attempt 1/3 — Line 12 — ZeroDivisionError: division by zero
+[py-eeive] ❌ Attempt 1/3 [██░░░░░░░░] 0.1s — RAM: 15.4 MB — Line 12 — ZeroDivisionError
+    Snapshot: a=10, b=0
 [py-eeive] 🔄 Retrying in 5 sec...
-[py-eeive] ❌ Attempt 2/3 — Line 12 — ZeroDivisionError: division by zero
+[py-eeive] ❌ Attempt 2/3 [████░░░░░░] 0.1s — RAM: 15.6 MB — Line 12 — ZeroDivisionError
+    Snapshot: a=10, b=0
 [py-eeive] 🔄 Retrying in 5 sec...
-[py-eeive] ❌ Attempt 3/3 — Line 12 — ZeroDivisionError: division by zero
+[py-eeive] ❌ Attempt 3/3 [██████░░░░] 0.1s — RAM: 15.8 MB — Line 12 — ZeroDivisionError
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 💥 Script failed permanently

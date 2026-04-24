@@ -5,6 +5,10 @@ import os
 import asyncio
 import inspect
 import json
+import platform
+import random
+import urllib.request
+from urllib.parse import urlparse, parse_qs
 from datetime import datetime
 
 ERRORS = {
@@ -412,6 +416,22 @@ DIM    = "\033[2m"
 def _line(char="─", width=50):
     return char * width
 
+def _get_ram_usage():
+    try:
+        import psutil
+        process = psutil.Process(os.getpid())
+        return f"{process.memory_info().rss / 1024 / 1024:.2f} MB"
+    except ImportError:
+        return "N/A"
+
+def _filter_locals(locals_data):
+    return {k: str(v)[:50] for k, v in locals_data.items() if not k.startswith('__')}
+
+def _get_timing_bar(elapsed, max_elapsed, width=10):
+    percent = min(elapsed / max_elapsed, 1.0) if max_elapsed > 0 else 0
+    filled = int(percent * width)
+    return "█" * filled + "░" * (width - filled)
+
 def _get_error_info(exc, lang, custom_errors=None):
     error_name = type(exc).__name__
     tb = traceback.extract_tb(exc.__traceback__)
@@ -426,7 +446,25 @@ def _get_error_info(exc, lang, custom_errors=None):
         explanation = ERRORS.get(lang, ERRORS["english"]).get(error_name)
     return error_name, line_no, filename, explanation
 
-def _save_log(func_name, error_name, tb_str, lang):
+def _send_webhook(url, message):
+    try:
+        payload = {"content": message, "text": message}
+        
+        if "api.telegram.org" in url:
+            parsed_url = urlparse(url)
+            query_params = parse_qs(parsed_url.query)
+            chat_id = query_params.get('chat_id', [None])[0]
+            if chat_id:
+                payload["chat_id"] = chat_id
+
+        data = json.dumps(payload).encode('utf-8')
+        req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json'})
+        with urllib.request.urlopen(req) as response:
+            pass
+    except:
+        pass
+
+def _save_log(func_name, error_name, tb_str, lang, attempts_data=None):
     log_dir = os.path.join(os.getcwd(), "logs")
     os.makedirs(log_dir, exist_ok=True)
     now = datetime.now()
@@ -438,14 +476,22 @@ def _save_log(func_name, error_name, tb_str, lang):
         "function": func_name,
         "error": error_name,
         "traceback": tb_str,
-        "language": lang
+        "language": lang,
+        "attempts": attempts_data,
+        "system": {
+            "os": platform.system(),
+            "os_release": platform.release(),
+            "python_version": platform.python_version(),
+            "machine": platform.machine()
+        }
     }
     
     with open(path, "w", encoding="utf-8") as f:
         json.dump(log_data, f, ensure_ascii=False, indent=4)
     return path
 
-def monitor(retries=1, retry_delay=5, log=True, language="english", custom_errors=None, exponential_backoff=False, retry_on=(Exception,)):
+def monitor(retries=1, retry_delay=5, log=True, language="english", custom_errors=None, 
+            exponential_backoff=False, retry_on=(Exception,), webhook_url=None, jitter=True):
     retries = max(1, int(retries))
     lang = language.lower()
     if lang not in TEXTS:
@@ -487,7 +533,11 @@ def monitor(retries=1, retry_delay=5, log=True, language="english", custom_error
                 print(f"    {DIM}Snapshot: {var_str}{RESET}")
             
             should_retry = attempt < retries and isinstance(exc, retry_on)
-            current_delay = retry_delay * (2 ** (attempt - 1)) if exponential_backoff else retry_delay
+            
+            base_delay = retry_delay * (2 ** (attempt - 1)) if exponential_backoff else retry_delay
+            if jitter and should_retry:
+                base_delay *= (0.5 + random.random())
+            current_delay = round(base_delay, 2)
             
             if should_retry:
                 print(f"{YELLOW}[py-eeive]{RESET} 🔄 {t['retrying']} {current_delay} {t['seconds']}...")
@@ -519,6 +569,10 @@ def monitor(retries=1, retry_delay=5, log=True, language="english", custom_error
             if log:
                 log_path = _save_log(func.__name__, error_name, tb_str, lang, attempts_data)
                 print(f"  📄 {t['log_saved']}: {DIM}{log_path}{RESET}")
+            
+            if webhook_url:
+                msg = f"💥 [py-eeive] {func.__name__} failed: {error_name} at line {line_no}"
+                _send_webhook(webhook_url, msg)
 
             print(f"{RED}{BOLD}" + _line("━") + RESET + "\n")
 

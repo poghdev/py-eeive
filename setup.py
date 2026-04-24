@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 setup(
     name="py-eeive",
-    version="1.0.0",
+    version="1.1.0",
     author="Poghoosyann",
     author_email="poghoosyann@gmail.com",
     description="Monitor your Python scripts with one decorator — retries, timing, and smart error explanations.",
@@ -15,7 +15,9 @@ setup(
     license="MIT",
     packages=find_packages(exclude=["tests", "examples"]),
     python_requires=">=3.7",
-    install_requires=[], 
+    install_requires=[
+        "psutil>=5.0.0",
+    ], 
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
@@ -24,6 +26,6 @@ setup(
     ],
     keywords="monitor, retry, decorator, logging, error-handling",
     project_urls={
-        "Bug Tracker": "https://github.com/poghdev/py-eeive/issues",
+        "Bug Tracker": "https://eeive.com",
     },
 )
